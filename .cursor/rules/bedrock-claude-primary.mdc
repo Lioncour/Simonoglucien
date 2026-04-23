@@ -1,0 +1,57 @@
+---
+description: Always use Claude via AWS Bedrock for user-facing answers (not only the built-in Cursor model)
+alwaysApply: true
+---
+
+# Primary model: Claude via AWS Bedrock (obligatorisk)
+
+For **every substantive reply** to the user in this repo, the answer must come from **Claude on AWS Bedrock** by running `.\ask-claude.ps1` and using its stdout as the main text shown to the user.
+
+**Do not** use only the built-in Cursor chat model for final answers when this rule applies. Use local tools (read, edit, terminal) as needed, then call Bedrock with a **single prompt** that includes the user’s question and any file/output context the model needs.
+
+## How to invoke
+
+From the **project root** `c:\dev\Simonoglucien`:
+
+```powershell
+.\ask-claude.ps1 "…full user question plus any file context you need…"
+```
+
+Settings (must match your org unless changed in the script):
+
+- Profile: `ki-bedrock-inference-261916864828`
+- Region: `eu-central-1`
+- Model ID: `eu.anthropic.claude-sonnet-4-6`
+
+Use **`content[0].text`** from the JSON response as the user-visible answer (the script prints that to stdout).
+
+## Auth: verify and fix
+
+1. **Quick check** (credentials / SSO):
+   ```powershell
+   .\verify-bedrock-auth.ps1
+   ```
+2. **SSO session expired or invalid** — sign in again:
+   ```powershell
+   aws sso login --profile ki-bedrock-inference-261916864828
+   ```
+   Then retry `.\ask-claude.ps1 "…"`.
+3. **New or broken SSO / profile** — reconfigure the profile (get URL, account, role from your admin):
+   ```powershell
+   aws configure sso --profile ki-bedrock-inference-261916864828
+   ```
+   Then `aws sso login` and run `.\verify-bedrock-auth.ps1` again.
+4. **Access denied to Bedrock** (STS works but `invoke-model` fails) — your IAM identity needs **`bedrock:InvokeModel`** (or org equivalent) for the inference profile in **eu-central-1**. That is fixed in **AWS IAM / SSO permission sets**, not in this repo.
+5. If Bedrock still fails after the above, tell the user **auth or IAM must be renewed** and list what you already tried.
+
+## Script locations
+
+- `c:\dev\Simonoglucien\ask-claude.ps1` — Bedrock invoke
+- `c:\dev\Simonoglucien\verify-bedrock-auth.ps1` — STS + optional Bedrock read check
+
+## Prerequisites
+
+- AWS CLI v2
+- Profile `ki-bedrock-inference-261916864828` (SSO or static keys) with permission to invoke the model in `eu-central-1`
+
+You may still run builds and file edits without Bedrock; **the message back to the user** for substantive work should be Bedrock-driven when this rule applies.

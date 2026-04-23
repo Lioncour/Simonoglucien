@@ -1,0 +1,276 @@
+/* Simon og Lucien — minimal studio layout */
+
+:root {
+  --ink: #111;
+  --paper: #fff;
+  --muted: #666;
+  --rule: #e8e8e8;
+  /* ~62–68 tegn med Montserrat; bedre for norsk sammensatte ord */
+  --column: min(42rem, 92vw);
+  --feed-gap: 0.5rem;
+  --font-stack: "Montserrat", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-stack);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+#top {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.site-header {
+  padding: 3.5rem 1.5rem 2.5rem;
+  text-align: center;
+}
+
+.site-title {
+  margin: 0;
+  font-size: clamp(1.22rem, 3.2vw, 1.48rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.site-title a {
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+main {
+  flex: 1;
+}
+
+.intro {
+  max-width: var(--column);
+  margin: 0 auto;
+  padding: 0 max(1rem, 4vw) 3rem;
+  text-align: center;
+  font-size: clamp(1.08rem, 2.4vw, 1.22rem);
+  line-height: 1.68;
+}
+
+/* Norsk tekst: orddeling (krever lang=nb/nb-NO), penere linje-slutt, ingen kunstige hardlinjer */
+.prose-nb {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 6 3 4;
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.intro p {
+  margin: 0 auto 1.25rem;
+  max-width: 65ch;
+  text-align: center;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+.intro strong {
+  font-weight: 700;
+}
+
+.feed-section {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1rem 3.5rem;
+}
+
+#instagram-mount {
+  min-height: 12rem;
+}
+
+.feed-placeholder {
+  max-width: var(--column);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.feed-placeholder__text {
+  margin: 0 0 1rem;
+}
+
+.feed-placeholder__text code {
+  font-size: 0.85em;
+  color: var(--ink);
+}
+
+.feed-placeholder__link {
+  margin: 0;
+}
+
+.feed-placeholder__link a {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.feed-gallery-mount {
+  min-height: 0;
+}
+
+.gallery-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--feed-gap);
+}
+
+.gallery-item {
+  margin: 0;
+  padding: 0;
+}
+
+.gallery-item > a,
+.gallery-item__frame {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--rule);
+  text-decoration: none;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  vertical-align: middle;
+}
+
+.gallery-item > a:hover img {
+  opacity: 0.92;
+}
+
+@media (max-width: 50rem) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    max-width: 28rem;
+    margin: 0 auto;
+  }
+}
+
+.location {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+.location__lead {
+  max-width: var(--column);
+  margin: 0 auto 1.25rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.map-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  aspect-ratio: 21 / 9;
+  min-height: 280px;
+  background: var(--rule);
+}
+
+.map-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.site-footer {
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--rule);
+}
+
+.back-to-top {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.back-to-top a {
+  text-decoration: none;
+}
+
+.back-to-top a:hover {
+  text-decoration: underline;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.footer-nav a {
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 40rem) {
+  .map-wrap {
+    aspect-ratio: 4 / 3;
+  }
+}

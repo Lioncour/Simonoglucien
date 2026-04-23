@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nb-NO" id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>simon og lucien as</title>
+    <meta
+      name="description"
+      content="Simon Søgnen Tveit og Lucien Skånseng — møbler og plassbygde løsninger i tre."
+    />
+    <meta property="og:site_name" content="simon og lucien as" />
+    <meta property="og:title" content="simon og lucien as" />
+    <meta property="og:url" content="https://simonoglucien.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="simon og lucien as" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 class="site-title">
+        <a href="#top">simon og lucien as</a>
+      </h1>
+    </header>
+
+    <main>
+      <section class="intro prose-nb" aria-label="Om oss">
+        <p>Vi er Simon Søgnen Tveit og Lucien Skånseng.</p>
+        <p>
+          Vi har hver vår mastergrad fra Arkitektur- og Designhøgskolen i Oslo, men fant vår
+          ekte lidenskap i treverk. Vi tegner og produserer både frittstående møbler og
+          plassbygde løsninger, fullstendig tilpasset ditt behov.
+        </p>
+        <p>
+          Send oss gjerne en
+          <a href="mailto:simon.tveit@gmail.com"><strong>e-post</strong></a>
+          med en kort beskrivelse av prosjektet ditt så tar vi gladelig en prat om hvordan vi kan
+          hjelpe.
+        </p>
+        <p>I mellomtiden må du gjerne se litt på våre tidligere prosjekter:</p>
+      </section>
+
+      <section class="feed-section" aria-label="Prosjekter fra Instagram">
+        <div id="instagram-mount"></div>
+      </section>
+
+      <section class="location" aria-label="Her finner du oss">
+        <p class="location__lead prose-nb">… og her finner du oss:</p>
+        <div class="map-wrap">
+          <iframe
+            title="Kart — Simon og Lucien AS, Tvetenveien 162, Oslo"
+            src="https://maps.google.com/maps?q=162+Tvetenveien,+0671+Oslo,+Norway&amp;hl=no&amp;z=14&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen=""
+          ></iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="back-to-top">
+        <a href="#top">Back To Top</a>
+      </div>
+      <nav class="footer-nav" aria-label="Lenker">
+        <a href="#top">til toppen</a>
+        <a
+          id="footer-insta"
+          href="https://www.instagram.com/flokroll/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >insta</a
+        >
+        <a
+          href="https://www.facebook.com/simonoglucien/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >face</a
+        >
+      </nav>
+    </footer>
+
+    <script src="js/site-config.js"></script>
+    <script>
+      (function () {
+        var a = document.getElementById('footer-insta');
+        var u = window.SITE_CONFIG && window.SITE_CONFIG.instagramUrl;
+        if (a && u) a.href = u;
+      })();
+    </script>
+    <script src="js/feed.js"></script>
+  </body>
+</html>

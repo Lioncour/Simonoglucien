@@ -1,0 +1,19 @@
+{
+  "images": [
+    {
+      "src": "images/gallery/01.jpg",
+      "alt": "Plassbygd løsning og interiør",
+      "href": "https://www.instagram.com/flokroll/"
+    },
+    {
+      "src": "images/gallery/02.jpg",
+      "alt": "Møbel i tre",
+      "href": "https://www.instagram.com/flokroll/"
+    },
+    {
+      "src": "images/gallery/03.jpg",
+      "alt": "Interiør",
+      "href": "https://www.instagram.com/flokroll/"
+    }
+  ]
+}

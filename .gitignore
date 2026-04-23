@@ -1,0 +1,8 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+*.log
+
+# Local env (never commit tokens)
+.env
+.env.*

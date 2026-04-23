@@ -1,0 +1,54 @@
+INSTAGRAM → NETTSIDE (AUTOMATISK VIA GITHUB ACTIONS)
+=====================================================
+
+Viktig om «privat» konto
+------------------------
+Meta tillater ikke Instagram Graph API for vanlige private PERSONLIGE kontoer.
+Du må ha Instagram som «profesjonell» konto:
+  • Creator ELLER Business
+  • Koblet til en Facebook-side du administrerer
+
+Det betyr: kontoen kan ikke forbli en ren privat personprofil i den forstand Meta
+bruker i API-et. Mange bruker «Creator» for å beholde et personlig uttrykk.
+Sjekk Instagram → Innstillinger → Kontotype.
+
+Hva dette prosjektet gjør
+-------------------------
+Workflowen «Sync Instagram gallery» kjører et script som:
+  1. Henter siste innlegg via Graph API
+  2. Laster ned bilder til images/gallery/auto/
+  3. Overskriver data/gallery.json (nettleseren din laster denne som før)
+
+Manuelle bilder i gallery.json blir erstattet når jobben kjører. Ta backup hvis
+du blander manuelt og automatisk innhold.
+
+Steg: Meta (én gang)
+--------------------
+1. Gå til https://developers.facebook.com/ og opprett en app (type som støtter
+   Instagram / forbruker eller bedrift etter det Meta tilbyr i veiviseren).
+2. Legg til produktet «Instagram» / følg oppsett for Instagram Graph API.
+3. Koble Instagram-konto (Creator/Business) til en Facebook-side.
+4. Skaff et langtidstoken med tilgang til å lese brukerens media
+   (Graph API Explorer eller OAuth-flyt – se Metas dokumentasjon for oppdaterte
+   scope-navn).
+5. Finn «Instagram Business Account ID» (numerisk id) for kontoen – ofte synlig i
+   Meta Business Suite eller via Graph API-kall mot den koblede siden.
+
+Steg: GitHub
+------------
+1. Repo → Settings → Secrets and variables → Actions → New repository secret
+     INSTAGRAM_ACCESS_TOKEN   = (langtidstoken fra Meta)
+     INSTAGRAM_USER_ID        = (Instagram Business Account ID)
+2. Valgfritt: Settings → Variables → legg INSTAGRAM_LIMIT (f.eks. 9) for antall
+   bilder. Standard er 9 hvis variabelen mangler.
+3. Actions → «Sync Instagram gallery» → «Run workflow» for første test.
+4. GitHub Pages må bygge fra samme branch som jobben pusher til (vanligvis main).
+
+Token utløper
+-------------
+Langtidstokens fra Meta må fornyes med jevne mellomrom. Når jobben feiler med
+401/403, generer nytt token og oppdater secret INSTAGRAM_ACCESS_TOKEN.
+
+Referanse
+---------
+https://developers.facebook.com/docs/instagram-platform/instagram-graph-api
